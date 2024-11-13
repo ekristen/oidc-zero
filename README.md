@@ -1,28 +1,18 @@
-# Go Project Template
+# OIDC Zero
 
-This is an opinionated go project template to use as a starting point for new projects.
+Simple OIDC Authentication Server. Intentionally missing a lot of features. Simply designed to allow for a basic
+configuration to load users and authenticate them. Not designed to be a full featured OIDC server. 
+
+Bulk of the `pkg/storage` borrowed and adapted from github.com/zitadel/oidc which is licensed under Apache 2.0.
 
 ## Features
 
-- Builds with [GoReleaser](https://goreleaser.com)
-  - Automated with GitHub Actions
-  - Signed with Cosign (providing you generate a private key)
-- Linting with [golangci-lint](https://golangci-lint.run/)
-  - Automated with GitHub Actions
-- Builds with Docker
-  - While designed to use goreleaser, you can still just run `docker build`
-- Apple Notary Signing Support
-- Opinionated Layout
-  - Never use `internal/` folder
-  - Everything is under `pkg/` folder
-- Commits must meet [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
-  - Automated with GitHub Actions ([commit-lint](https://github.com/conventional-changelog/commitlint/#what-is-commitlint))
-- Automatic Dependency Management with [Renovate](https://github.com/renovatebot/renovate)
-- Automatic [Semantic Releases](https://semantic-release.gitbook.io/)
-- Documentation with Material for MkDocs
-- API Server Example
-  - Uses Gorilla Mux (yes it's been archived, still the best option)
-- Stubbed out Go Tests (**note:** they are not comprehensive)
+- Provide login capability for OIDC clients.
+- Simple configuration to load users and authenticate them. (yes passwords are stored in plaintext)
+
+## Build from go-project-template
+
+This project was built from the go-project-template. Below are some of the features and decisions made in the template.
 
 ### Opinionated Decisions
 

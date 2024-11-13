@@ -1,0 +1,23 @@
+users:
+  - id: "01J8858KMTNVW3RSBVGPQ0HGJB"
+    username: "instructor"
+    password: "instructor"
+    first_name: "SANS"
+    last_name: "Instructor"
+    email: "admin@localhost"
+    roles: ["instructor"]
+  - id: "01J88593XPQX878NS5Q17FRVX3"
+    username: "student"
+    password: "student"
+    first_name: "SANS"
+    last_name: "Student"
+    email: "student"
+    roles: ["student"]
+clients:
+  - id: "nomad"
+    type: "web"
+    secret: "nomad"
+    redirect_uris:
+      - "http://localhost:4649/oidc/callback"
+      - "http://localhost:4646/ui/settings/tokens"
+      - "http://localhost:4242/callback"

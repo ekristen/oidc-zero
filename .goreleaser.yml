@@ -1,12 +1,13 @@
+version: 2
 release:
   github:
     owner: ekristen
-    name: go-project-template
+    name: oidc-zero
 env:
   - REGISTRY=ghcr.io
-  - IMAGE=ekristen/go-project-template
+  - IMAGE=ekristen/oidc-zero
 builds:
-  - id: go-project-template
+  - id: oidc-zero
     goos:
       - linux
       - windows
@@ -38,9 +39,9 @@ builds:
 sboms:
   - artifacts: archive
 archives:
-  - id: go-project-template
+  - id: oidc-zero
     builds:
-      - go-project-template
+      - oidc-zero
     name_template: "{{ .ProjectName }}-v{{ .Version }}-{{ .Os }}-{{ .Arch }}{{ .Arm }}"
     format_overrides:
       - goos: windows
@@ -48,7 +49,7 @@ archives:
 dockers:
   - id: linux-amd64
     ids:
-      - go-project-template
+      - oidc-zero
     use: buildx
     goos: linux
     goarch: amd64
@@ -69,7 +70,7 @@ dockers:
 
   - id: linux-arm64
     ids:
-      - go-project-template
+      - oidc-zero
     use: buildx
     goos: linux
     goarch: arm64
@@ -114,7 +115,7 @@ docker_signs:
 checksum:
   name_template: "checksums.txt"
 snapshot:
-  name_template: '{{ trimprefix .Summary "v" }}'
+  version_template: '{{ trimprefix .Summary "v" }}'
 # We are skipping changelog because we are using semantic release
 changelog:
-  skip: true
+  disable: true

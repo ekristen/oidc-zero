@@ -1,4 +1,4 @@
-package apiserver
+package server
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/ekristen/go-project-template/pkg/common"
+	"github.com/ekristen/oidc-zero/pkg/common"
 )
 
 func RootHandler(w http.ResponseWriter, r *http.Request) {

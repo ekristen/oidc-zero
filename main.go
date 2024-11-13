@@ -8,7 +8,9 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli/v2"
 
-	"github.com/ekristen/go-project-template/pkg/common"
+	"github.com/ekristen/oidc-zero/pkg/common"
+
+	_ "github.com/ekristen/oidc-zero/pkg/commands/server"
 )
 
 func main() {
@@ -29,7 +31,7 @@ func main() {
 	app.Authors = []*cli.Author{
 		{
 			Name:  "Erik Kristensen",
-			Email: "erik@erikkristensen",
+			Email: "erik@erikkristensen.com",
 		},
 	}
 

@@ -1,32 +1,53 @@
-# Go Project Template
+# OIDC Zero
 
-This is an opinionated go project template to use as a starting point for new projects.
+Simple OIDC Authentication Server. Intentionally missing a lot of features. Simply designed to allow for a basic
+configuration to load users and authenticate them. Not designed to be a full-featured OIDC server.
+
+Bulk of the `pkg/storage` borrowed and adapted from github.com/zitadel/oidc which is licensed under Apache 2.0.
 
 ## Features
 
-- Builds with [GoReleaser](https://goreleaser.com)
-    - Automated with GitHub Actions
-    - Signed with Cosign (providing you generate a private key)
-- Linting with [golangci-lint](https://golangci-lint.run/)
-    - Automated with GitHub Actions
-- Builds with Docker
-    - While designed to use goreleaser, you can still just run `docker build`
-- Apple Notary Signing Support
-- Opinionated Layout
-    - Never use `internal/` folder
-    - Everything is under `pkg/` folder
-- Automatic Dependency Management with [Renovate](https://github.com/renovatebot/renovate)
-- Automatic [Semantic Releases](https://semantic-release.gitbook.io/)
-- Documentation with Material for MkDocs
-- API Server Example
-    - Uses Gorilla Mux (yes it's been archived, still the best option)
-- Stubbed out Go Tests (**note:** they are not comprehensive)
+- Provide login capability for OIDC clients.
+- Simple configuration to load users and authenticate them. (yes passwords are stored in plaintext)
+
+## Built from go-project-template
+
+This project was built from the [go-project-template](https://github.com/ekristen/go-project-template).
+Below are some of the features and decisions made in the template.
 
 ### Opinionated Decisions
 
 - Uses `init` functions for registering commands globally.
-    - This allows for multiple `main` package files to be written and include different commands.
-    - Allows the command code to remain isolated from each other and a simple import to include the command.
+  - This allows for multiple `main` package files to be written and include different commands.
+  - Allows the command code to remain isolated from each other and a simple import to include the command.
+
+### Multi-Platform Builds
+
+This project is designed to build for multiple platforms, including macOS, Linux, and Windows. It also supports
+multiple architectures including amd64 and arm64.
+
+The goreleaser configuration is set up to build for all platforms and architectures by default. It even supports pushing
+multi-architecture docker manifests by default. Some knowledge about GoReleaser's configuration is required should you
+want to remove these capabilities.
+
+### Apple Notary Signing
+
+This makes use of a tool called [quill](https://github.com/anchore/quill). To make use of this feature you will need
+to have an Apple Developer account and be able to create an Developer ID certificate.
+
+The workflow is designed to pull the necessary secrets from 1Password. This is done to keep the secrets out of the
+GitHub Actions logs. The secrets are pulled from 1Password if the event triggering the workflow is a tag **AND** the
+actor is the owner of the repository. This is to prevent forks from being able to pull the secrets and is an extra
+guard to help prevent theft.
+
+GoReleaser is configured to always sign and notarize for macOS. However, it will not notarize if the build is a snapshot.
+
+If configured properly, the binaries located within the archives produced by GoReleaser will be signed and notarized
+by the Apple Notary Service and will automatically run on any macOS system without having to approve it under System
+Preferences.
+
+If you do not wish to use 1Password simply export the same environment variables using secrets to populate them. The
+`QUILL_SIGN_P12` and `QUILL_NOTARY_KEY` need to be base64 encoded or paths to the actual files.
 
 ## Building
 
@@ -50,28 +71,19 @@ Environment Variables:
 cosign generate-key-pair
 ```
 
-## Configure
+### Docker
 
-1. Rename Repository
-2. Generate Cosign Keys (optional if you want to run with signing locally, see above)
-3. Update `.goreleaser.yml`, search/replace go-project-template with new project name, adjust GitHub owner
-4. Update `main.go`,
-5. Update `go.mod`, rename go project (using IDE is best so renames happen across all files)
+The Dockerfile is set up to build the project and then copy the artifacts from the build into the final image. It is
+also configured to allow you to just run `docker build` directly if you do not want to use GoReleaser.
+
+To make things easier and faster, the Dockerfile has a default build argument set to `go-project-template`. GoReleaser
+will pass the new project name down (if you update the `.goreleaser.yml` file) and the Dockerfile will use that instead.
+
+However, it would be better longer term to update this argument in the file or remove it all together.
 
 ### Signing
 
 Signing happens via cosign's keyless features using the GitHub Actions OIDC provider.
-
-### Releases
-
-In order for Semantic Releases and GoReleaser to work properly you have to create a PAT to run Semantic Release
-so it's actions against the repository can trigger other workflows. Unfortunately there is no way to trigger
-a workflow from a workflow if both are run by the automatically generated GitHub Actions secret.
-
-1. Create PAT that has content `write` permissions to the repository
-2. Create GitHub Action Secret
-    - `SEMANTIC_GITHUB_TOKEN` -> populated with PAT from step 1
-3. Done
 
 ## Documentation
 

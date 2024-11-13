@@ -1,7 +1,7 @@
-site_name: Go Project Template
-site_url: https://ekristen.github.io/go-project-template
-repo_name: ekristen/go-project-template
-repo_url: https://github.com/ekristen/go-project-template
+site_name: oidc-zero
+site_url: https://ekristen.github.io/oidc-zero
+repo_name: ekristen/oidc-zero
+repo_url: https://github.com/ekristen/oidc-zero
 edit_uri: ""
 
 site_dir: public

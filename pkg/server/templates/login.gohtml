@@ -1,0 +1,43 @@
+{{ define "login" -}}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="//localhost:4242/css/bulma.min.css">
+</head>
+<body>
+<section class="hero is-primary is-fullheight">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+                    <form method="POST" action="/login/username" class="box">
+                        <input type="hidden" name="id" value="{{.ID}}">
+                        <div class="field">
+                            <label for="" class="label">Email</label>
+                            <div class="control">
+                                <input type="username" id="username" name="username" placeholder="e.g. bobsmith@gmail.com" class="input" autocomplete="false" autocapitalize="false" required>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="" class="label">Password</label>
+                            <div class="control">
+                                <input type="password" id="password" name="password" placeholder="*******" class="input" autocomplete="false" required>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <button class="button is-success">
+                                Login
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
+{{- end }}
