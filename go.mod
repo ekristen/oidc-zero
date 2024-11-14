@@ -11,7 +11,7 @@ require (
 	github.com/sirupsen/logrus v1.9.3
 	github.com/stretchr/testify v1.9.0
 	github.com/urfave/cli/v2 v2.27.5
-	github.com/zitadel/logging v0.6.0
+	github.com/zitadel/logging v0.6.1
 	github.com/zitadel/oidc/v3 v3.23.1
 	golang.org/x/text v0.14.0
 	gopkg.in/yaml.v3 v3.0.1
