@@ -25,6 +25,8 @@ builds:
       - -X '{{ .ModulePath }}/pkg/common.BRANCH={{ .Branch }}'
       - -X '{{ .ModulePath }}/pkg/common.VERSION={{ .Tag }}'
       - -X '{{ .ModulePath }}/pkg/common.COMMIT={{ .Commit }}'
+    env:
+      - CGO_ENABLED=0
     mod_timestamp: '{{ .CommitTimestamp }}'
     hooks:
       post:
