@@ -4,7 +4,7 @@ ARG PROJECT_NAME=oidc-zero
 RUN addgroup -S ${PROJECT_NAME} && adduser -S ${PROJECT_NAME} -G ${PROJECT_NAME}
 ENTRYPOINT ["/usr/local/bin/oidc-zero"]
 
-FROM docker.io/library/golang:1.21 AS build
+FROM docker.io/library/golang:1.24 AS build
 ARG PROJECT_NAME=oidc-zero
 COPY / /src
 WORKDIR /src
